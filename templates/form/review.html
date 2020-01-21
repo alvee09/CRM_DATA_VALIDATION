@@ -1,0 +1,401 @@
+{% extends 'base.html' %} {% block content %}
+<body onload="loader()">
+<div class=" background">
+  <div class="opacity container">
+    <h2
+      class="heading"
+      style="text-shadow: black; text-align: center; margin-top: 15px;"
+    >
+      Review the Data inserted and confirm upload
+    </h2>
+    <h4 style="text-align: center;">C&A Portal Information</h4>
+
+    {% for i in shipment %}
+    <div class="container">
+          
+        <div method="post" action="{% url 'form:add_details' %}">
+          {% csrf_token %}
+          <div class="form-group">
+              <div class="md-form">
+            <div class="">
+              <label for="PONumber"
+                >Purchase Order Number</label
+              >
+              <input
+              value="{{ i.PONumber }}"
+                class="form-control po"
+                type="text"
+                id="PONumber"
+                name="PONumber"
+                
+                
+                
+              />
+            </div>
+          </div>
+          <div class="">
+            <div class="form-group">
+              <label for="SupName">Supplier Name</label>
+            <input
+            {% for j in supplier %}
+                value="{{ j.SupplierName }}"
+              type="text"
+              class= "form-control supp_name select2"
+              id="SupName"
+              name="SupName"
+              />
+            </div>
+
+          </div>
+        </div>
+<div class="row">
+<div class = 'col-md-12'>
+            <div class="md-form">
+              <label for="SupAddress"
+                >Supplier Address:
+              </label>
+              <input
+              value="{{ j.SupplierAddress }}"
+                type="text"
+                rows="2"
+                class="form-control"
+                id="SupAddress"
+                name="SupAddress"
+                
+              />
+            
+            </div>
+            </div>
+</div>
+<div class="row">
+          <div class="col-md-6">
+            <div class="md-form">
+              <label for="RexNo"
+                >REX No
+              </label>
+              <input
+                value="{{ j.RexNo }}"
+                type="text"
+                class="form-control"
+                id="RexNo"
+                name="RexNo"
+                {% endfor %}
+              />
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="md-form">
+              <label for="USIMno"
+                >USIM No:
+              </label>
+              <input
+                value="{{ i.USIMno }}"
+                type="number"
+                class="form-control"
+                id="USIMno"
+                name="USIMno"
+              />
+            </div>
+          </div>
+        </div>
+        </div>
+            <div class = "row">
+              <div class = 'col-md-3'>
+            <div class="md-form">
+              <label for="Composition">Composition</label>
+              <input
+              value="{{ i.Composition }}"
+              type="text"
+                class="form-control"
+                id="Composition"
+                name="Composition"
+              />
+            </div>
+            </div>
+            <div class="col-md-3">
+              <div class="md-form">
+              <label for="PaymentCondition"
+                >Payment Condition
+              </label>
+              <input
+              value="{{ i.PaymentCondition }}"
+              type="text"
+                class="form-control"
+                id="PaymentCondition"
+                name="PaymentCondition"
+              />
+            </div>
+            </div>
+            
+            <div class="col-md-3">
+              <div class="md-form">
+              <label for="MerchandiseDescription"
+                >Merchandise Description:
+              </label>
+              <input
+              value="{{ i.MerchandiseDescription }}"
+              type= "text"
+                class="form-control"
+                id="MerchandiseDescription"
+                name="MerchandiseDescription"
+              />
+            </div>
+          </div>
+            <div class="col-md-3">
+              <div class = "md-form">
+              <label for="DeliveryCondition"
+                >Delivery Condition:
+              </label>
+              <input
+              value="{{ i.DeliveryCondition }}"
+                type="text"
+                class="form-control"
+                id="DeliveryCondition"
+                name="DeliveryCondition"
+              />
+            </div>
+          </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3 form-group">
+                <div class="md-form">
+              <label for="ClothingStructure"
+                >Clothing Structure:
+              </label>
+              <input
+                value="{{ i.ClothingStructure }}"
+                type="text"
+                class="form-control"
+                id="ClothingStructure"
+                name="ClothingStructure"
+              />
+                
+            </div>
+        </div>
+
+            <div class="col-md-3 form-group">
+                <div class="md-form">
+              <label for="TransportationMethod"
+                >Transportation Method:</label
+              >
+              <input
+                value="{{ i.TransportationMethod }}"
+                type="text"
+                class="form-control"
+                id="TransportationMethod"
+                name="TransportationMethod"
+              />
+            </div>
+            </div>
+            <div class="col-md-3 form-group">
+                <div class="md-form">
+              <label for="PackOrSet">Pack or Set? </label>
+              <input
+              value="{{ i.PackOrSet }}"
+                type="text"
+                class="form-control"
+                id="PackOrSet"
+                name="PackOrSet"
+              />
+            </div>
+        </div>
+            
+            <div class=" col-md-3 form-group">
+                <div class="md-form">
+              <label for="PackingMethod"
+                >Packing Method:
+              </label>
+              <input
+                value="{{ i.PackingMethod }}"
+                type="text"
+                class="form-control"
+                id="PackingMethod"
+                name="PackingMethod"
+              />
+            </div>
+          </div>
+          </div>
+          <div class = 'row'>
+            <div class="col-md-3">
+            <div class= "md-form">
+              <label for="GrossWeight">Gross Weight: </label>
+              <input
+                value="{{ i.GrossWeight }}"
+                step="0.01"
+                type="number"
+                class="form-control"
+                id="GrossWeight"
+                name="GrossWeight"
+              />
+            </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class= "md-form">
+              <label for="NetWeight">Net Weight: </label>
+              <input
+              value="{{ i.NetWeight }}"
+                step="0.01"
+                type="number"
+                class="form-control"
+                id="NetWeight"
+                name="NetWeight"
+              />
+            </div>
+            </div>
+            <div class="col-md-3">
+              <div class= "md-form">
+              <label for="carton"
+                >Number of Cartons:
+              </label>
+              <input
+              value="{{ i.carton }}"
+                type="number"
+                class="form-control"
+                id="carton"
+                name="carton"
+              />
+            </div>
+            </div>
+            <div class="col-md-3">
+              <div class= "md-form">
+              <label for="quantity"
+                >Number of Pieces:
+              </label>
+              <input
+              value="{{ i.quantity }}"
+                type="number"
+                class="form-control"
+                id="quantity"
+                name="quantity"
+              />
+            </div>
+            </div>
+          </div>
+        
+          <div class="row">
+            <div class="col-md-3">
+              <div class= "md-form">
+
+              <label for="UnitPrice">Unit price</label>
+              <input
+              value="{{ i.UnitPrice }}"
+                step="0.01"
+                type="number"
+                class="form-control"
+                id="UnitPrice"
+                name="UnitPrice"
+              />
+            </div>
+            </div>
+                <div class="col-md-3">
+                  <div class= "md-form">
+                  <label for="TotalAmount">Total Amount: </label>
+                  <input
+                  value="{{ i.TotalAmount }}"
+                    step="0.01"
+                    type="number"
+                    class="form-control"
+                    id="TotalAmount"
+                    name="TotalAmount"
+                  />
+                </div>
+                </div>
+            <div class="col-md-3">
+              <div class= "md-form">
+              <label for="UnitPriceBreakdown"
+                >Unit Price Breakdown:
+              </label>
+              <input
+              value="{{ i.UnitPriceBreakdown }}"
+                type="number"
+                class="form-control"
+                id="UnitPriceBreakdown"
+                name="UnitPriceBreakdown"
+              />
+            </div>
+            </div>
+            <div class="col-md-3">
+              <div class= "md-form">
+              <label for="pig"
+                >Pieces in Garments(P.I.G):
+              </label>
+              <input
+              value="{{ i.pig }}"
+                type="number"
+                class="form-control"
+                id="pig"
+                name="pig"
+              />
+            </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <div class= "md-form">
+            <label for="currency">Currency</label>
+            <input
+            value="{{ i.currency }}"
+              type="text"
+              class="form-control"
+              id="currency"
+              name="currency"
+            />
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class= "md-form">
+              <label for="CoO"
+                >Country of Origin:
+              </label>
+              <input value = "{{ i.CoO }}"type="text" class="form-control" id="CoO" name="CoO" />
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class= "md-form">
+              <label for="HSCode">HS CODE: </label>
+              <input
+                value="{{ i.HSCode }}"
+                type="text"
+                class="form-control"
+                id="HSCode"
+                name="HSCode"
+              />
+            </div>
+            </div>
+          </div>
+        <//div>
+    {% endfor %}
+    <script></script>
+    <div
+      class="center"
+      style="margin-top: 25px; padding: 5px; text-align: center;"
+    >
+      <button type="submit" class="btn btn-info btn-lg" name="reg_user">
+        <a href="{% url 'form:reviewed' %}">Save and add another</a>
+      </button>
+      <button type="submit" class="btn btn-info btn-lg" name="reg_user">
+        <a href="{% url 'form:edit' %}">Edit Input</a>
+      </button>
+    </div>
+    
+  </div>  
+</div>
+<script>
+    function loader(){ 
+        console.log('loader')
+        //document.getElementById("PONumber").focus();
+        //document.getElementById("PONumber").disabled = true;
+
+        var x = document.getElementsByClassName("form-control");
+        var i;
+        for (i = 0; i < x.length; i++) {
+            x[i].focus();
+            x[i].disabled = true;
+        }
+     }
+
+</script>
+</body>
+{% endblock %}

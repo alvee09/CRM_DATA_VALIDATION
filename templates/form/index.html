@@ -1,0 +1,474 @@
+{% extends 'base.html' %} {% block content %}
+
+
+    <div class=" background">
+      <div class="opacity container">
+        <h2
+          class="heading"
+          style="text-shadow: black; text-align: center; margin-top: 15px;"
+        >
+          Please Enter the Source Data Details
+        </h2>
+        <h4 style="text-align: center;">C&A Portal Information</h4>
+        <div class="container">
+          
+            <form method="post" action="{% url 'form:add_details' %}">
+              {% csrf_token %}
+              <div class="form-group">
+                  <div class="">
+                <div class="md-form">
+                  <label for="PONumber"
+                    >Purchase Order Number</label
+                  >
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="PONumber"
+                    name="PONumber"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="">
+                <div class="form-group">
+                  <label for="SupName">Supplier Name</label>
+                  <!--<input
+                  onkeyup="getSuggestions()"
+                  type="text"
+                  class= "form-control supp_name select2"
+                  id="SupName"
+                  name="SupName"
+                  />-->
+                  <select class= "form-control listtype select2 col" id="SupName"
+                  name="SupName" onchange="getAddress()">
+                  <option selected>Choose...</option>
+                  {% for i in supplier_list %}
+                  <option value = "{{ i.RexNo }}">{{ i.SupplierName }}</option>
+                  {% endfor %} 
+                </select>
+                </div>
+
+              </div>
+            </div>
+<div class="row">
+  <div class = 'col-md-12'>
+    <p id = "addressTitle" hidden>Supplier Address</p>
+                <div class="md-form">
+                  <div name="SupAddress" id = "addressField" contenteditable="TRUE">
+                  <label for="SupAddress"
+                    >Supplier Address:
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="SupAddress"
+                    name="SupAddress"
+                    required
+                  />
+                </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="md-form">
+                  <label for="RexNo"
+                    >REX No
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="RexNo"
+                    name="RexNo"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="md-form">
+                  <label for="USIMno"
+                    >USIM No:
+                  </label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="USIMno"
+                    name="USIMno"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+                <div class = "row">
+                  <div class = 'col-md-3'>
+                <div class="md-form">
+                  <label for="Composition">Composition</label>
+                  <input
+                  type="text"
+                    class="form-control"
+                    id="Composition"
+                    name="Composition"
+                    required
+                  />
+                </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="md-form">
+                  <label for="PaymentCondition"
+                    >Payment Condition
+                  </label>
+                  <input
+                  type="text"
+                    class="form-control"
+                    id="PaymentCondition"
+                    name="PaymentCondition"
+                    required
+                  />
+                </div>
+                </div>
+                
+                <div class="col-md-3">
+                  <div class="md-form">
+                  <label for="MerchandiseDescription"
+                    >Merchandise Description:
+                  </label>
+                  <input
+                  type= "text"
+                    class="form-control"
+                    id="MerchandiseDescription"
+                    name="MerchandiseDescription"
+                    required
+                  />
+                </div>
+              </div>
+                <div class="col-md-3">
+                  <div class = "md-form">
+                  <label for="DeliveryCondition"
+                    >Delivery Condition:
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="DeliveryCondition"
+                    name="DeliveryCondition"
+                    required
+                  />
+                </div>
+              </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3 form-group">
+                  <label for="ClothingStructure"
+                    >Clothing Structure:
+                  </label>
+                  <select
+                    class="form-control"
+                    id="ClothingStructure"
+                    name="ClothingStructure"
+                  >
+                    <option value="woven">WOVEN</option>
+                    <option value="knitted">KNITTED</option>
+                    <option value="leather">LEATHER</option>
+                    <option value="other">OTHER</option>
+                  </select>
+                </div>
+                
+    
+                <div class="col-md-3 form-group">
+                  <label for="exampleFormControlSelect1"
+                    >Transportation Method:</label
+                  >
+                  <select
+                    type="text"
+                    class="form-control"
+                    id="TransportationMethod"
+                    name="TransportationMethod"
+                  >
+                    <option value="sea">SEA</option>
+                    <option value="air">AIR</option>
+                    <option value="sea/air">SEA/AIR</option>
+                    <option value="rail">RAIL</option>
+                  </select>
+                </div>
+                <div class="col-md-3 form-group">
+                  <label for="exampleFormControlSelect1">Pack or Set? </label>
+                  <select
+                    type="text"
+                    class="form-control"
+                    id="PackOrSet"
+                    name="PackOrSet"
+                  >
+                    <option value="pack">Pack</option>
+                    <option value="set">Set</option>
+                  </select>
+                </div>
+                
+                <div class=" col-md-3 form-group">
+                  <label for="exampleFormControlSelect1"
+                    >Packing Method:
+                  </label>
+                  <select
+                    type="text"
+                    class="form-control"
+                    id="PackingMethod"
+                    name="PackingMethod"
+                  >
+                    <option value="hanging">HANGING</option>
+                    <option value="packedin">PACKED IN</option>
+                  </select>
+                </div>
+              </div>
+              <div class = 'row'>
+                <div class="col-md-3">
+                <div class= "md-form">
+                  <label for="GrossWeight">Gross Weight: </label>
+                  <input
+                    step="0.01"
+                    type="number"
+                    class="form-control"
+                    id="GrossWeight"
+                    name="GrossWeight"
+                    required
+                  />
+                </div>
+                </div>
+
+                <div class="col-md-3">
+                  <div class= "md-form">
+                  <label for="NetWeight">Net Weight: </label>
+                  <input
+                    step="0.01"
+                    type="number"
+                    class="form-control"
+                    id="NetWeight"
+                    name="NetWeight"
+                    required
+                  />
+                </div>
+                </div>
+                <div class="col-md-3">
+                  <div class= "md-form">
+                  <label for="carton"
+                    >Number of Cartons:
+                  </label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="carton"
+                    name="carton"
+                    required
+                  />
+                </div>
+                </div>
+                <div class="col-md-3">
+                  <div class= "md-form">
+                  <label for="quantity"
+                    >Number of Pieces:
+                  </label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="quantity"
+                    name="quantity"
+                    required
+                  />
+                </div>
+                </div>
+              </div>
+            
+              <div class="row">
+                <div class="col-md-3">
+                  <div class= "md-form">
+
+                  <label for="UnitPrice">Unit price</label>
+                  <input
+                    step="0.01"
+                    type="number"
+                    class="form-control"
+                    id="UnitPrice"
+                    name="UnitPrice"
+                    required
+                  />
+                </div>
+                </div>
+                    <div class="col-md-3">
+                      <div class= "md-form">
+                      <label for="TotalAmount">Total Amount: </label>
+                      <input
+                        step="0.01"
+                        type="number"
+                        class="form-control"
+                        id="TotalAmount"
+                        name="TotalAmount"
+                        required
+                      />
+                    </div>
+                    </div>
+                <div class="col-md-3">
+                  <div class= "md-form">
+                  <label for="UnitPriceBreakdown"
+                    >Unit Price Breakdown:
+                  </label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="UnitPriceBreakdown"
+                    name="UnitPriceBreakdown"
+                    required
+                  />
+                </div>
+                </div>
+                <div class="col-md-3">
+                  <div class= "md-form">
+                  <label for="pig"
+                    >Pieces in Garments(P.I.G):
+                  </label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="pig"
+                    name="pig"
+                    required
+                  />
+                </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <div class= "md-form">
+                <label for="currency">Currency</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="currency"
+                  name="currency"
+                  required
+                />
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class= "md-form">
+                  <label for="CoO"
+                    >Country of Origin:
+                  </label>
+                  <input type="text" class="form-control" id="CoO" name="CoO" required/>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class= "md-form">
+                  <label for="HSCode">HS CODE: </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="HSCode"
+                    name="HSCode"
+                    required
+                  />
+                </div>
+                </div>
+              </div>
+            </div>
+              <div
+                class="center"
+                style="margin-top: 25px; padding: 5px; text-align: center;"
+              >
+                <button
+                  type="submit"
+                  class="btn btn-info btn-lg"
+                  name="reg_user"
+                  onclick = "alertSystem()"
+                >
+                  Save and add another
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <style>
+    .label{
+      text-size: 90%;
+    }</style>
+  <script>
+    $(".select2").select2();
+
+    function getSuggestions(){
+      console.log("changed")
+      var x = document.getElementById('SupName').value;
+      console.log(x);
+      $.ajax({
+          // initialize an AJAX request
+          url: '{% url "form:getSuggestions" %}',
+          data: {
+            name: x // add the country id to the GET parameters
+          },
+          success: function(data){
+            console.log(data);
+            console.log("success");
+            parentDiv = document.getElementById('nameList');
+            parentDiv.style.display ="block"
+            // var x = JSON.parse(data);
+            for (i = 0; i < data.length; i++) {
+              var element =data[i];
+              console.log(element.RexNo);
+              if (i == 0) {
+                parentDiv.innerHTML =
+                  '<option value="' +
+                  element.RexNo +
+                  '">' +
+                  element.SupplierName +
+                  "</option>";
+              } else {  
+                parentDiv.innerHTML =
+                parentDiv.innerHTML +
+                  '<option value="' +
+                  element.RexNo +
+                  '">' +
+                  element.SupplierName +
+                  "</option>";
+              }
+            }
+          },
+          error: function(xhr) {
+            console.log(xhr.responseType);
+          }
+    });
+    }
+
+    function getAddress(){
+      console.log('123');
+      var x = document.getElementById('SupName').value;
+      $.ajax({
+        url: '{% url "form:getAddress" %}',
+        data: {
+          rex : x
+        },
+        success: function(data){
+          parentDiv = document.getElementById('addressField');
+          title = document.getElementById("addressTitle");
+            for(i = 0; i<data.length; i++){
+              var element = data[i]
+              //parentDiv.innerHTML = element.SupplierAddress;
+              //title.style.display = "block";
+              console.log(element.SupplierAddress);
+              console.log(title.innerHTML);
+              document.getElementById('SupAddress').focus();
+              document.getElementById('SupAddress').value = element.SupplierAddress;
+              document.getElementById('RexNo').focus();
+              document.getElementById('RexNo').value = element.RexNo;
+            }
+        }
+      }
+
+      )
+    }
+    function alertSystem(){
+      setTimeout(function () {
+        alert("Data Successfully added to the Database")
+      }, 3000)
+    }
+
+    
+  </script>
+{% endblock %}
